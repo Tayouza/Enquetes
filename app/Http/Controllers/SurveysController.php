@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ModelSurvey;
+use Exception;
+use App\Http\Requests\SurveyRequest;
 
 class SurveysController extends Controller
 {
 
-    private $objUser;
     private $objSurvey;
 
     public function __construct()
@@ -27,13 +28,7 @@ class SurveysController extends Controller
     {
         $surveys = $this->objSurvey->all();
 
-        $answers = [];
-
-        foreach ($surveys as $survey) {
-            array_push($answers, json_decode($survey->answers));
-        }
-
-        return view('index', compact('surveys', 'answers'));
+        return view('index', compact('surveys'));
     }
 
     /**
@@ -43,7 +38,7 @@ class SurveysController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -52,9 +47,18 @@ class SurveysController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SurveyRequest $request)
     {
-        //
+        try {
+            $this->objSurvey->create([
+                'title' => $request->title,
+                'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
+                'ended_at' => str_replace('T', ' ', $request->ended_at)
+            ]);
+            return redirect('survey');
+        } catch (Exception $e) {
+            return redirect('fail');
+        }
     }
 
     /**
@@ -65,7 +69,11 @@ class SurveysController extends Controller
      */
     public function show($id)
     {
-        //
+        $survey = $this->objSurvey->find($id);
+        //make string coming from db in array
+        $answers = json_decode($survey->answers);
+
+        return view('show', compact('survey', 'answers'));
     }
 
     /**
@@ -76,7 +84,8 @@ class SurveysController extends Controller
      */
     public function edit($id)
     {
-        //
+        $survey = $this->objSurvey->find($id);
+        return view('create', compact('survey'));
     }
 
     /**
@@ -86,7 +95,7 @@ class SurveysController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SurveyRequest $request, $id)
     {
         //
     }
@@ -100,5 +109,17 @@ class SurveysController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return JSON
+     */
+    public function getAnswers($id)
+    {
+        $answers = $this->objSurvey->find($id);
+        return json_encode($answers, JSON_UNESCAPED_UNICODE);
     }
 }

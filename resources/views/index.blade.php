@@ -3,29 +3,28 @@
 @section('title', 'Teste Crud')
 
 @section('content')
-
 <div class="container">
-    <h1 class="text-center py-1">Tayouza Surveys</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Título</th>
-                <th>Inicio</th>
-                <th>Término</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($surveys as $survey)
-            <tr>
-                <td>{{$survey->id}}</td>
-                <td>{{$survey->title}}</td>
-                <td>{{$survey->created_at->format('d/m/Y H:i')}}</td>
-                <td>{{$survey->end_at->format('d/m/Y H:i')}}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="text-center py-2">
+        <h1>Tayouza Surveys</h1>
+        <a href="{{url("survey/create")}}" class="btn btn-success">Nova enquete</a>
+    </div>
+    <div class="d-flex justify-content-center align-itens-center flex-wrap">
+        @foreach($surveys as $survey)
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{$survey->title}}</h5>
+                <p class="card-text">
+                    Criado em: {{date('d/m/Y H:i', strtotime($survey->created_at))}}
+                    Termina em: {{date('d/m/Y H:i', strtotime($survey->ended_at))}}
+                </p>
+                <a href="{{url("survey/{$survey->id}")}}"
+                    class="btn btn-primary">Votar</a>
+                <a href="{{url("survey/{$survey->id}/edit")}}"
+                    class="btn btn-warning">Editar</a>
+            </div>
+        </div>
+        @endforeach
+    </div>
 </div>
 
 @endsection

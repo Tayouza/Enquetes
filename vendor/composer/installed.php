@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v9.1.8',
-        'version' => '9.1.8.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '9daf1537b1eb33a3628c8dddf1a63ce01bc4c8b2',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -364,6 +364,15 @@
                 0 => '*',
             ),
         ),
+        'laravel-lang/lang' => array(
+            'pretty_version' => '10.0.0',
+            'version' => '10.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel-lang/lang',
+            'aliases' => array(),
+            'reference' => '9318ef2dc0ea2dd42edbe35b94796307b62f8b9e',
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v9.13.0',
             'version' => '9.13.0.0',
@@ -374,12 +383,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v9.1.8',
-            'version' => '9.1.8.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '9daf1537b1eb33a3628c8dddf1a63ce01bc4c8b2',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -736,8 +745,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

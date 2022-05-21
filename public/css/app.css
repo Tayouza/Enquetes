@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 458px) {
+
+    #registerSurvey>div {
+        width: 100%;
+    }
+
+    #registerSurvey input {
+        max-width: 80%;
+    }
+
+    .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inputAnswer {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+    }
+
+    .remove-btn {
+        width: 38px !important;
+        height: 38px !important;
+        display: grid;
+        place-items: center;
+    }
+}

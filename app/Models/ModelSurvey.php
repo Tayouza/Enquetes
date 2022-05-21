@@ -10,16 +10,7 @@ class ModelSurvey extends Model
     use HasFactory;
 
     protected $table = 'surveys';
+    protected $fillable = ['title', 'answers', 'ended_at'];
     
-    /**
-    * relationship between user column and survey column.
-    *
-    * @return void
-    */
-
-    public function relSurveys()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
-    }
 
 }

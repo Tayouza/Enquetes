@@ -15,15 +15,11 @@ return new class extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->string('title');
             $table->string('answers', 2000);
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
-            $table->dateTime('end_at');
+            $table->dateTime('ended_at');
         });
     }
 
