@@ -20,7 +20,7 @@
 
 <body class="antialiased">
     <header>
-        <a href="/survey" id="home"> < </a>
+        <a href="../" id="home"> < </a>
     </header>
     @yield('content')
 </body>

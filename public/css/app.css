@@ -84,7 +84,7 @@ header {
 }
 
 .table-survey{
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .table-survey tr{
@@ -94,5 +94,5 @@ header {
 }
 
 .table-survey td input{
-    transform: scale(1.5);
+    transform: scale(1.2);
 }

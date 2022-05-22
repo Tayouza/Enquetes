@@ -27,7 +27,7 @@
             class="d-flex flex-column align-items-center justify-content-center">
         <?php endif; ?>
             <?php echo csrf_field(); ?>
-            <div class="title mb-2"">
+            <div class="title mb-2">
                 <input type="text" value="<?php echo e($survey->title ?? ''); ?>" name="title" id="title" class="form-control my-2" placeholder="Titulo" key="<?php echo e($survey->id ?? ''); ?>" required>
             </div>
             
@@ -37,7 +37,7 @@
 
             <div class="date-end">
                 <label for="ended_at">Este enquete deve terminar em: </label>
-                <input type="datetime-local" value="<?php echo e(isset($survey) ? str_replace(' ', 'T',$survey->ended_at) : ''); ?>" name="ended_at" id="ended_at" class="form-control" required>
+                <input type="datetime-local" min="<?php echo e(str_replace(' ', 'T', date('Y-m-d H:i'))); ?>" value="<?php echo e(isset($survey) ? str_replace(' ', 'T',$survey->ended_at) : ''); ?>" name="ended_at" id="ended_at" class="form-control" required>
             </div>
             <input type="submit" value="<?php if(isset($survey)): ?>Alterar <?php else: ?> Criar <?php endif; ?>" class="btn btn-success my-2">
         </form>

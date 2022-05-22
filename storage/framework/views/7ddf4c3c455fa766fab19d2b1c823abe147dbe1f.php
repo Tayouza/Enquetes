@@ -15,15 +15,14 @@
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
     <script src="/js/sweetalert.js"></script>
-    <script src="/js/app.js"></script>
 </head>
 
 <body class="antialiased">
     <?php echo $__env->yieldContent('content'); ?>
 </body>
 
-</html>
 <section class="d-flex justify-content-center align-items-center flex-column section-home">
     <h2 class="text-center">Seja Bem vindo à Tayouza Surveys</h2>
     <a type="button" href="/survey" class="btn btn-success w-50">Enquetes</a>
-</section><?php /**PATH C:\Users\TayouzaDev\Documents\projects\tayouza-survey\resources\views/home.blade.php ENDPATH**/ ?>
+</section>
+</html><?php /**PATH C:\Users\TayouzaDev\Documents\projects\tayouza-survey\resources\views/home.blade.php ENDPATH**/ ?>

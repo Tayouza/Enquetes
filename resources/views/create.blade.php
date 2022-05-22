@@ -26,7 +26,7 @@
             class="d-flex flex-column align-items-center justify-content-center">
         @endif
             @csrf
-            <div class="title mb-2"">
+            <div class="title mb-2">
                 <input type="text" value="{{$survey->title ?? ''}}" name="title" id="title" class="form-control my-2" placeholder="Titulo" key="{{$survey->id ?? ''}}" required>
             </div>
             
@@ -36,7 +36,7 @@
 
             <div class="date-end">
                 <label for="ended_at">Este enquete deve terminar em: </label>
-                <input type="datetime-local" value="{{isset($survey) ? str_replace(' ', 'T',$survey->ended_at) : ''}}" name="ended_at" id="ended_at" class="form-control" required>
+                <input type="datetime-local" min="{{str_replace(' ', 'T', date('Y-m-d H:i'))}}" value="{{isset($survey) ? str_replace(' ', 'T',$survey->ended_at) : ''}}" name="ended_at" id="ended_at" class="form-control" required>
             </div>
             <input type="submit" value="@if(isset($survey))Alterar @else Criar @endif" class="btn btn-success my-2">
         </form>

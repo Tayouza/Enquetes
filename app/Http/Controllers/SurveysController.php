@@ -10,7 +10,6 @@ use App\Http\Requests\SurveyRequest;
 
 class SurveysController extends Controller
 {
-
     private $objSurvey;
 
     public function __construct()
@@ -50,6 +49,7 @@ class SurveysController extends Controller
     public function store(SurveyRequest $request)
     {
         try {
+            date_default_timezone_set('America/Sao_Paulo');
             $this->objSurvey->create([
                 'title' => $request->title,
                 'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
@@ -100,8 +100,9 @@ class SurveysController extends Controller
      */
     public function update(SurveyRequest $request, $id)
     {
+        date_default_timezone_set('America/Sao_Paulo');
         try {
-            $this->objSurvey->where(['id'=>$id])->update([
+            $this->objSurvey->where(['id' => $id])->update([
                 'title' => $request->title,
                 'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
                 'updated_at' => date('Y-m-d H:i:s'),
@@ -111,7 +112,7 @@ class SurveysController extends Controller
         } catch (Exception $e) {
             $error = $e;
             return view('fail', compact('error'));
-        }        
+        }
     }
 
     /**
@@ -125,7 +126,7 @@ class SurveysController extends Controller
         $deleted = $this->objSurvey->destroy($id);
         return $deleted ? true : false;
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
