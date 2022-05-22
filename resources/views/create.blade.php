@@ -26,12 +26,13 @@
             class="d-flex flex-column align-items-center justify-content-center">
         @endif
             @csrf
-            <div class="title">
+            <div class="title mb-2"">
                 <input type="text" value="{{$survey->title ?? ''}}" name="title" id="title" class="form-control my-2" placeholder="Titulo" key="{{$survey->id ?? ''}}" required>
             </div>
-            <input type="button" value="Adicionar resposta" onclick="duplicateInput()" class="btn btn-primary mb-3">
-
+            
             <div id="options"></div>
+
+            <input type="button" value="+" onclick="duplicateInput()" class="btn btn-primary rounded-circle mt-3 add-btn">
 
             <div class="date-end">
                 <label for="ended_at">Este enquete deve terminar em: </label>

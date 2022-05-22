@@ -22,3 +22,4 @@ Route::get('/survey/{id}', [SurveysController::class, 'show']);
 Route::put('/survey/{id}', [SurveysController::class, 'update']);
 Route::get('/survey/{id}/edit', [SurveysController::class, 'edit']);
 Route::get('/answer/{id}', [SurveysController::class, 'getAnswers']);
+Route::delete('/survey/{id}', [SurveysController::class, 'destroy']);

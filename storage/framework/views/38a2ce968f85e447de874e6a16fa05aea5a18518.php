@@ -7,7 +7,6 @@
 <div class="container">
     <div class="text-center py-2">
         <h2><?php echo e($survey->title); ?></h2>
-        <a href="#" class="btn btn-success"></a>
     </div>
     <div class="d-flex justify-content-center align-items-center flex-wrap">
         <p>Criado em: <?php echo e(date('d/m/Y H:i', strtotime($survey->created_at))); ?></p>
@@ -16,12 +15,20 @@
     <div class="flex flex-column justify-content-center align-items-center">
         <form action="" class="d-flex flex-column align-items-center justify-content-center">
             <?php echo csrf_field(); ?>
-            <?php $__currentLoopData = $answers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $answer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div>
-                <span><?php echo e($answer); ?></span>
-                <input type="radio" name="answer">
-            </div>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <table class="table-survey">
+                <tbody>
+                    <?php $__currentLoopData = $answers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $answer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td>
+                            <span><?php echo e($answer); ?></span>
+                        </td>
+                        <td>
+                            <input type="radio" name="answer">
+                        </td>
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </tbody>
+            </table>
         </form>
     </div>
 </div>

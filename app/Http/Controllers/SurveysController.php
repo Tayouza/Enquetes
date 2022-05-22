@@ -122,7 +122,8 @@ class SurveysController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = $this->objSurvey->destroy($id);
+        return $deleted ? true : false;
     }
     
     /**

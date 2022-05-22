@@ -9,6 +9,7 @@
         <a href="{{url("survey/create")}}" class="btn btn-success">Nova enquete</a>
     </div>
     <div class="d-flex justify-content-center align-itens-center flex-wrap">
+        @csrf
         @foreach($surveys as $survey)
         <div class="card m-3" style="width: 18rem;">
             <div class="card-body">
@@ -21,6 +22,8 @@
                     class="btn btn-primary">Votar</a>
                 <a href="{{url("survey/{$survey->id}/edit")}}"
                     class="btn btn-warning">Editar</a>
+                <a href="{{url("survey/{$survey->id}")}}"
+                    class="btn btn-danger btn-delete">Deletar</a>
             </div>
         </div>
         @endforeach

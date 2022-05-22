@@ -71,9 +71,28 @@ header {
     place-items: center;
 }
 
+.add-btn{
+    display: grid;
+    place-items: center;
+}
+
 .date-end {
     display: flex;
     flex-direction: column;
     padding: 10px 0;
     row-gap: 10px;
+}
+
+.table-survey{
+    font-size: 2em;
+}
+
+.table-survey tr{
+    display: flex;
+    column-gap: 1em;
+    justify-content: space-between;
+}
+
+.table-survey td input{
+    transform: scale(1.5);
 }

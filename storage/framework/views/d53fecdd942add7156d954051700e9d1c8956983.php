@@ -27,12 +27,13 @@
             class="d-flex flex-column align-items-center justify-content-center">
         <?php endif; ?>
             <?php echo csrf_field(); ?>
-            <div class="title">
+            <div class="title mb-2"">
                 <input type="text" value="<?php echo e($survey->title ?? ''); ?>" name="title" id="title" class="form-control my-2" placeholder="Titulo" key="<?php echo e($survey->id ?? ''); ?>" required>
             </div>
-            <input type="button" value="Adicionar resposta" onclick="duplicateInput()" class="btn btn-primary mb-3">
-
+            
             <div id="options"></div>
+
+            <input type="button" value="+" onclick="duplicateInput()" class="btn btn-primary rounded-circle mt-3 add-btn">
 
             <div class="date-end">
                 <label for="ended_at">Este enquete deve terminar em: </label>

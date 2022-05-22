@@ -9,6 +9,7 @@
         <a href="<?php echo e(url("survey/create")); ?>" class="btn btn-success">Nova enquete</a>
     </div>
     <div class="d-flex justify-content-center align-itens-center flex-wrap">
+        <?php echo csrf_field(); ?>
         <?php $__currentLoopData = $surveys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $survey): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="card m-3" style="width: 18rem;">
             <div class="card-body">
@@ -23,6 +24,8 @@
                     class="btn btn-primary">Votar</a>
                 <a href="<?php echo e(url("survey/{$survey->id}/edit")); ?>"
                     class="btn btn-warning">Editar</a>
+                <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
+                    class="btn btn-danger btn-delete">Deletar</a>
             </div>
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
