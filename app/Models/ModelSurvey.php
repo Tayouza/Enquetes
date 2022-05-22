@@ -10,7 +10,6 @@ class ModelSurvey extends Model
     use HasFactory;
 
     protected $table = 'surveys';
-    protected $fillable = ['title', 'answers', 'ended_at'];
+    protected $fillable = ['title', 'answers', 'created_at', 'updated_at', 'ended_at'];
     
-
 }

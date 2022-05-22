@@ -5,21 +5,21 @@ var inputText = $('<input>').attr('type', 'text')
 var inputBtn = $('<input>').attr('type', 'button')
     .attr('value', 'X')
     .attr('onclick', 'removeInput(this)')
-    .addClass('btn btn-danger rounded-circle m-1 remove-btn')
+    .addClass('remove-btn')
 
 const newInput = (items = []) => {
     if (items.length < 3) {
         items.length = 3
     }
     for (i = 0; i < items.length; i++) {
-        var answerWrapper = $('<div>').addClass('d-flex answerWrapper')
+        var answerWrapper = $('<div>').addClass('answerWrapper')
         answerWrapper.append(inputText.attr('value', items[i]).clone()).append(inputBtn.clone())
         $('#options').append(answerWrapper)
     }
 }
 
 const getAnswers = async (id) => {
-    const data = await fetch(`http://localhost:8000/answer/${id}`)
+    const data = await fetch(`http://192.168.100.59:8000/answer/${id}`)
         .then(res => res.json())
         .then(data => {
             const answers = JSON.parse(data.answers)
@@ -38,7 +38,7 @@ incrementIDAsnwers()
 incrementPlaceholders()
 
 function duplicateInput() {
-    var answerWrapper = $('<div>').addClass('d-flex answerWrapper')
+    var answerWrapper = $('<div>').addClass('answerWrapper')
     answerWrapper.append(inputText.attr('value', '').clone()).append(inputBtn.clone())
     $('#options').append(answerWrapper)
     incrementIDAsnwers()

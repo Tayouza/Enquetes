@@ -35,7 +35,7 @@
 
             <div class="date-end">
                 <label for="ended_at">Este enquete deve terminar em: </label>
-                <input type="datetime-local" value="{{$survey->ended_at ?? ''}}" name="ended_at" id="ended_at" class="form-control" required>
+                <input type="datetime-local" value="{{isset($survey) ? str_replace(' ', 'T',$survey->ended_at) : ''}}" name="ended_at" id="ended_at" class="form-control" required>
             </div>
             <input type="submit" value="@if(isset($survey))Alterar @else Criar @endif" class="btn btn-success my-2">
         </form>

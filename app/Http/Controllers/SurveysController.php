@@ -53,11 +53,14 @@ class SurveysController extends Controller
             $this->objSurvey->create([
                 'title' => $request->title,
                 'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
+                'created_at' => date('Y-m-d H:i:s'),
+                'uploaded_at' => date('Y-m-d H:i:s'),
                 'ended_at' => str_replace('T', ' ', $request->ended_at)
             ]);
             return redirect('survey');
         } catch (Exception $e) {
-            return redirect('fail');
+            $error = $e;
+            return view('fail', compact('error'));
         }
     }
 
@@ -97,7 +100,18 @@ class SurveysController extends Controller
      */
     public function update(SurveyRequest $request, $id)
     {
-        //
+        try {
+            $this->objSurvey->where(['id'=>$id])->update([
+                'title' => $request->title,
+                'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
+                'updated_at' => date('Y-m-d H:i:s'),
+                'ended_at' => str_replace('T', ' ', $request->ended_at)
+            ]);
+            return redirect('survey');
+        } catch (Exception $e) {
+            $error = $e;
+            return view('fail', compact('error'));
+        }        
     }
 
     /**

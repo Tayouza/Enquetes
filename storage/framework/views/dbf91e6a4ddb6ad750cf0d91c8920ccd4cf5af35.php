@@ -1,29 +1,32 @@
-<?php $__env->startSection('title', 'Teste Crud'); ?>
+
+
+<?php $__env->startSection('title', 'Tayouza Survey'); ?>
 
 <?php $__env->startSection('content'); ?>
-
 <div class="container">
-    <h1 class="text-center py-1">Tayouza Surveys</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Título</th>
-                <th>Inicio</th>
-                <th>Término</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $__currentLoopData = $surveys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $survey): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <tr>
-                <td><?php echo e($survey->id); ?></td>
-                <td><?php echo e($survey->title); ?></td>
-                <td><?php echo e($survey->created_at->format('d/m/Y H:i')); ?></td>
-                <td><?php echo e($survey->end_at->format('d/m/Y H:i')); ?></td>
-            </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </tbody>
-    </table>
+    <div class="text-center py-2">
+        <h1>Tayouza Surveys</h1>
+        <a href="<?php echo e(url("survey/create")); ?>" class="btn btn-success">Nova enquete</a>
+    </div>
+    <div class="d-flex justify-content-center align-itens-center flex-wrap">
+        <?php $__currentLoopData = $surveys; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $survey): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo e($survey->title); ?></h5>
+                <p class="card-text">
+                    Criado em: <?php echo e(date('d/m/Y H:i', strtotime($survey->created_at))); ?>
+
+                    Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->ended_at))); ?>
+
+                </p>
+                <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
+                    class="btn btn-primary">Votar</a>
+                <a href="<?php echo e(url("survey/{$survey->id}/edit")); ?>"
+                    class="btn btn-warning">Editar</a>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    </div>
 </div>
 
 <?php $__env->stopSection(); ?>

@@ -4,33 +4,58 @@
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 458px) {
+#registerSurvey>div {
+    width: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    #registerSurvey>div {
-        width: 100%;
-    }
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-    #registerSurvey input {
-        max-width: 80%;
-    }
+#options {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+}
 
-    .inputWrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.answerWrapper {
+    position: relative;
+    width: 100%;
+}
 
-    .inputAnswer {
-        display: flex;
-        flex-direction: column;
-        width: 360px;
-    }
+.inputAnswer {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+}
 
-    .remove-btn {
-        width: 38px !important;
-        height: 38px !important;
-        display: grid;
-        place-items: center;
-    }
+.inputAnswerText {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.remove-btn {
+    background-color: transparent;
+    border: 0;
+    color: tomato;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38px !important;
+    height: 38px !important;
+    display: grid;
+    place-items: center;
+}
+
+.date-end{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    row-gap: 10px;
 }
