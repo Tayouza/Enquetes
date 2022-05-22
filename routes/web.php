@@ -14,6 +14,7 @@ use App\Http\Controllers\SurveysController;
 |
 */
 
+Route::get('/', function(){ return view('home'); });
 Route::get('/survey', [SurveysController::class, 'index']);
 Route::post('/survey', [SurveysController::class, 'store']);
 Route::get('/survey/create', [SurveysController::class, 'create']);

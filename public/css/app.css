@@ -4,6 +4,24 @@
     box-sizing: border-box;
 }
 
+.section-home {
+    height: 100vh;
+}
+
+header {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+#home {
+    text-decoration: none;
+    color: #888;
+    font-size: 24px;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    padding-right: 20px;
+}
+
 #registerSurvey>div {
     width: 360px;
     display: flex;
@@ -53,7 +71,7 @@
     place-items: center;
 }
 
-.date-end{
+.date-end {
     display: flex;
     flex-direction: column;
     padding: 10px 0;

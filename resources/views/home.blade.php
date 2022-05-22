@@ -19,10 +19,11 @@
 </head>
 
 <body class="antialiased">
-    <header>
-        <a href="/survey" id="home"> < </a>
-    </header>
     @yield('content')
 </body>
 
 </html>
+<section class="d-flex justify-content-center align-items-center flex-column section-home">
+    <h2 class="text-center">Seja Bem vindo à Tayouza Surveys</h2>
+    <a type="button" href="/survey" class="btn btn-success w-50">Enquetes</a>
+</section>
