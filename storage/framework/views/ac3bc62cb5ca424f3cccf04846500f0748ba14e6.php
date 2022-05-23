@@ -20,7 +20,7 @@
 
 <body class="antialiased template">
     <div class="window">
-        <header class="container">
+        <header>
             <a href="/survey" id="home">
                 < </a>
         </header>

@@ -13,6 +13,9 @@
 
 .window {
     max-width: 1080px;
+    box-shadow: 25px 35px 10px 10px #555;
+    resize: both;
+    overflow: auto;
 }
 
 header {
@@ -20,8 +23,8 @@ header {
 }
 
 .content {
-    padding: 50px 10px;
-    box-shadow: 25px 35px 10px 10px #555;
+    height: 100%;
+    padding: 50px 30px;
 }
 
 .section-home {
@@ -134,10 +137,15 @@ header {
 
 @media screen and (max-width: 768px) {
 
+    .window{
+        resize: none;
+    }
+
     .content {
         box-shadow: none;
         width: 100%;
         height: calc(100% - 53px);
+        padding: 0;
     }
 
     .window {
