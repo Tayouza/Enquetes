@@ -3,7 +3,6 @@
 <?php $__env->startSection('title', 'Tayouza Survey'); ?>
 
 <?php $__env->startSection('content'); ?>
-
 <div>
     <div class="text-center py-2">
         <h2><?php echo e($survey->title); ?></h2>
@@ -24,6 +23,9 @@
                         </td>
                         <td>
                             <input type="radio" name="answer">
+                        </td>
+                        <td>
+                            <span><?php echo e($votes); ?></span>
                         </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

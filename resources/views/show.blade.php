@@ -3,7 +3,6 @@
 @section('title', 'Tayouza Survey')
 
 @section('content')
-
 <div>
     <div class="text-center py-2">
         <h2>{{$survey->title}}</h2>
@@ -24,6 +23,9 @@
                         </td>
                         <td>
                             <input type="radio" name="answer">
+                        </td>
+                        <td>
+                            <span>{{$votes}}</span>
                         </td>
                     </tr>
                     @endforeach

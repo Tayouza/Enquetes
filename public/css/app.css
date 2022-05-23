@@ -123,12 +123,18 @@ header {
 .table-survey tr {
     display: flex;
     column-gap: 1em;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .table-survey td {
-    display: grid;
-    place-items: center;
+    width: 220px;
+    display: flex;
+    align-items: center;
+}
+
+.table-survey td:nth-of-type(2),
+.table-survey td:nth-of-type(3){
+    width: 20px;
 }
 
 .table-survey td input {

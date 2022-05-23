@@ -47,17 +47,22 @@ class SurveysController extends Controller
     {
         try {
             date_default_timezone_set('America/Sao_Paulo');
+
+            $answers = $request->answer;
+
+            $toJSON = json_encode($this->surveyAnswersToJSON($answers), JSON_UNESCAPED_UNICODE);
+
             $this->objSurvey->create([
                 'title' => $request->title,
-                'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
+                'answers' => $toJSON,
                 'created_at' => date('Y-m-d H:i:s'),
                 'uploaded_at' => date('Y-m-d H:i:s'),
                 'ended_at' => str_replace('T', ' ', $request->ended_at)
             ]);
             return redirect('survey');
         } catch (Exception $e) {
-            $error = $e;
-            return view('fail', compact('error'));
+            $errors = $e;
+            return view('fail', compact('errors'));
         }
     }
 
@@ -98,10 +103,15 @@ class SurveysController extends Controller
     public function update(SurveyRequest $request, $id)
     {
         date_default_timezone_set('America/Sao_Paulo');
+
+        $answers = $request->answer;
+
+        $toJSON = $this->surveyAnswersToJSON($answers);
+
         try {
             $this->objSurvey->where(['id' => $id])->update([
                 'title' => $request->title,
-                'answers' => json_encode($request->answer, JSON_UNESCAPED_UNICODE),
+                'answers' => json_encode($toJSON, JSON_UNESCAPED_UNICODE),
                 'updated_at' => date('Y-m-d H:i:s'),
                 'ended_at' => str_replace('T', ' ', $request->ended_at)
             ]);
@@ -134,5 +144,21 @@ class SurveysController extends Controller
     {
         $answers = $this->objSurvey->find($id);
         return json_encode($answers, JSON_UNESCAPED_UNICODE);
+    }
+
+    private function surveyAnswersToJSON($arr)
+    {
+        $iterator = new \ArrayIterator($arr);
+
+        $newArrKeyValue = [];
+
+        while ($iterator->valid()) {
+
+            $newArrKeyValue[$iterator->current()] = "0";
+
+            $iterator->next();
+        }
+
+        return $newArrKeyValue;
     }
 }

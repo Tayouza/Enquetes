@@ -23,7 +23,7 @@ const getAnswers = async (id) => {
         .then(res => res.json())
         .then(data => {
             const answers = JSON.parse(data.answers)
-            newInput(answers)
+            newInput(Object.keys(answers))
         })
         .catch(e => { console.log(e) })
 }
