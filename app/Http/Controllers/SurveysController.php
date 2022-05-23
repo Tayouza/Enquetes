@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\ModelSurvey;
 use Exception;
 use App\Http\Requests\SurveyRequest;
@@ -14,7 +12,6 @@ class SurveysController extends Controller
 
     public function __construct()
     {
-        $this->objUser = new User();
         $this->objSurvey = new ModelSurvey();
     }
 

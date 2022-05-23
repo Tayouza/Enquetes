@@ -17,7 +17,7 @@
             @csrf
             <table class="table-survey">
                 <tbody>
-                    @foreach($answers as $answer)
+                    @foreach($answers as $answer => $votes)
                     <tr>
                         <td>
                             <span>{{$answer}}</span>
