@@ -18,11 +18,16 @@
     <script src="/js/delete.js"></script>
 </head>
 
-<body class="antialiased">
-    <header>
-        <a href="../" id="home"> < </a>
-    </header>
-    @yield('content')
+<body class="antialiased template">
+    <div class="window">
+        <header class="container">
+            <a href="/survey" id="home">
+                < </a>
+        </header>
+        <section class="bg-light content">
+            @yield('content')
+        </section>
+    </div>
 </body>
 
 </html>

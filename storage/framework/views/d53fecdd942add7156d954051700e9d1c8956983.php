@@ -4,7 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
 
-<div class="container">
+<div>
     <?php if(isset($errors) && count($errors)>0): ?>
     <div class="text-center my-4 p-2 alert alert-danger">
         <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

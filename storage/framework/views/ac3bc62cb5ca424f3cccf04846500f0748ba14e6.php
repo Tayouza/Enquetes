@@ -18,11 +18,16 @@
     <script src="/js/delete.js"></script>
 </head>
 
-<body class="antialiased">
-    <header>
-        <a href="../" id="home"> < </a>
-    </header>
-    <?php echo $__env->yieldContent('content'); ?>
+<body class="antialiased template">
+    <div class="window">
+        <header class="container">
+            <a href="/survey" id="home">
+                < </a>
+        </header>
+        <section class="bg-light content">
+            <?php echo $__env->yieldContent('content'); ?>
+        </section>
+    </div>
 </body>
 
 </html><?php /**PATH C:\Users\TayouzaDev\Documents\projects\tayouza-survey\resources\views/templates/template.blade.php ENDPATH**/ ?>

@@ -3,7 +3,7 @@
 <?php $__env->startSection('title', 'Tayouza Survey'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div>
     <div class="text-center py-2">
         <h1>Tayouza Surveys</h1>
         <a href="<?php echo e(url("survey/create")); ?>" class="btn btn-success">Nova enquete</a>

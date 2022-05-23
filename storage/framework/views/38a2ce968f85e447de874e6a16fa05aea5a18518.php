@@ -4,7 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
 
-<div class="container">
+<div>
     <div class="text-center py-2">
         <h2><?php echo e($survey->title); ?></h2>
     </div>
@@ -13,7 +13,7 @@
         <p>Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->ended_at))); ?></p>
     </div>
     <div class="flex flex-column justify-content-center align-items-center">
-        <form action="" class="d-flex flex-column align-items-center justify-content-center">
+        <form action="" class="d-flex flex-column align-items-center justify-content-center form-votes">
             <?php echo csrf_field(); ?>
             <table class="table-survey">
                 <tbody>

@@ -4,6 +4,26 @@
     box-sizing: border-box;
 }
 
+.template {
+    background-color: #ccc;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+.window {
+    max-width: 1080px;
+}
+
+header {
+    background-color: #888;
+}
+
+.content {
+    padding: 50px 10px;
+    box-shadow: 25px 35px 10px 10px #555;
+}
+
 .section-home {
     height: 100vh;
 }
@@ -13,9 +33,15 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+.card {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
 #home {
     text-decoration: none;
-    color: #888;
+    color: #fff;
     font-size: 24px;
     border-right: 1px solid #ccc;
     padding: 10px;
@@ -71,7 +97,7 @@ header {
     place-items: center;
 }
 
-.add-btn{
+.add-btn {
     display: grid;
     place-items: center;
 }
@@ -83,16 +109,39 @@ header {
     row-gap: 10px;
 }
 
-.table-survey{
+.form-votes {
+    padding: 10px;
+}
+
+.table-survey {
     font-size: 1.5em;
 }
 
-.table-survey tr{
+.table-survey tr {
     display: flex;
     column-gap: 1em;
     justify-content: space-between;
 }
 
-.table-survey td input{
+.table-survey td {
+    display: grid;
+    place-items: center;
+}
+
+.table-survey td input {
     transform: scale(1.2);
+}
+
+@media screen and (max-width: 768px) {
+
+    .content {
+        box-shadow: none;
+        width: 100%;
+        height: calc(100% - 53px);
+    }
+
+    .window {
+        width: 100%;
+        height: 100%;
+    }
 }

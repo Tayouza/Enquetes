@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container">
+<div>
     @if(isset($errors) && count($errors)>0)
     <div class="text-center my-4 p-2 alert alert-danger">
         @foreach($errors->all() as $error)

@@ -18,11 +18,9 @@
 </head>
 
 <body class="antialiased">
-    <?php echo $__env->yieldContent('content'); ?>
-</body>
-
-<section class="d-flex justify-content-center align-items-center flex-column section-home">
+<section class="d-flex justify-content-center align-items-center flex-column section-home bg-light">
     <h2 class="text-center">Seja Bem vindo à Tayouza Surveys</h2>
     <a type="button" href="/survey" class="btn btn-success w-50">Enquetes</a>
 </section>
+</body>
 </html><?php /**PATH C:\Users\TayouzaDev\Documents\projects\tayouza-survey\resources\views/home.blade.php ENDPATH**/ ?>

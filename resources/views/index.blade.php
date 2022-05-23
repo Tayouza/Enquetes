@@ -3,7 +3,7 @@
 @section('title', 'Tayouza Survey')
 
 @section('content')
-<div class="container">
+<div>
     <div class="text-center py-2">
         <h1>Tayouza Surveys</h1>
         <a href="{{url("survey/create")}}" class="btn btn-success">Nova enquete</a>

@@ -19,7 +19,7 @@ const newInput = (items = []) => {
 }
 
 const getAnswers = async (id) => {
-    const data = await fetch(`http://192.168.100.59:8000/answer/${id}`)
+    const data = await fetch(`http://localhost:8000/answer/${id}`)
         .then(res => res.json())
         .then(data => {
             const answers = JSON.parse(data.answers)
