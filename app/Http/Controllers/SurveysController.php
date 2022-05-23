@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelSurvey;
 use Exception;
+use ArrayIterator;
 use App\Http\Requests\SurveyRequest;
 
 class SurveysController extends Controller
@@ -50,7 +51,7 @@ class SurveysController extends Controller
 
             $answers = $request->answer;
 
-            $toJSON = json_encode($this->surveyAnswersToJSON($answers), JSON_UNESCAPED_UNICODE);
+            $toJSON = json_encode(self::surveyAnswersToJSON($answers), JSON_UNESCAPED_UNICODE);
 
             $this->objSurvey->create([
                 'title' => $request->title,
@@ -106,7 +107,7 @@ class SurveysController extends Controller
 
         $answers = $request->answer;
 
-        $toJSON = $this->surveyAnswersToJSON($answers);
+        $toJSON = self::surveyAnswersToJSON($answers);
 
         try {
             $this->objSurvey->where(['id' => $id])->update([
@@ -135,7 +136,7 @@ class SurveysController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Provides answers data.
      *
      * @param  int  $id
      * @return JSON
@@ -146,9 +147,15 @@ class SurveysController extends Controller
         return json_encode($answers, JSON_UNESCAPED_UNICODE);
     }
 
-    private function surveyAnswersToJSON($arr)
+    /**
+     * Format array answers.
+     *
+     * @param  Array
+     * @return Array
+     */
+    public static function surveyAnswersToJSON($arr)
     {
-        $iterator = new \ArrayIterator($arr);
+        $iterator = new ArrayIterator($arr);
 
         $newArrKeyValue = [];
 

@@ -2,6 +2,7 @@ var inputText = $('<input>').attr('type', 'text')
     .attr('name', 'answer[]')
     .attr('required', '')
     .addClass('form-control my-1 inputAnswerText')
+    
 var inputBtn = $('<input>').attr('type', 'button')
     .attr('value', 'X')
     .attr('onclick', 'removeInput(this)')

@@ -12,7 +12,8 @@
         <p>Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->ended_at))); ?></p>
     </div>
     <div class="flex flex-column justify-content-center align-items-center">
-        <form action="" class="d-flex flex-column align-items-center justify-content-center form-votes">
+        <form action="<?php echo e(url("countvotes/{$survey->id}")); ?>" method="POST" class="d-flex flex-column align-items-center justify-content-center form-votes">
+            <?php echo method_field('PUT'); ?>
             <?php echo csrf_field(); ?>
             <table class="table-survey">
                 <tbody>
@@ -22,7 +23,7 @@
                             <span><?php echo e($answer); ?></span>
                         </td>
                         <td>
-                            <input type="radio" name="answer">
+                            <input type="radio" name="answer" value="<?php echo e($answer); ?>" required>
                         </td>
                         <td>
                             <span><?php echo e($votes); ?></span>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SurveysController;
+use App\Http\Controllers\VotesController;
 date_default_timezone_set('America/Sao_Paulo');
 
 /*
@@ -24,3 +25,5 @@ Route::put('/survey/{id}', [SurveysController::class, 'update']);
 Route::get('/survey/{id}/edit', [SurveysController::class, 'edit']);
 Route::get('/answer/{id}', [SurveysController::class, 'getAnswers']);
 Route::delete('/survey/{id}', [SurveysController::class, 'destroy']);
+Route::get('/countvotes/{id}', [VotesController::class, 'show']);
+Route::put('/countvotes/{id}', [VotesController::class, 'update']);

@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelSurvey;
 use Illuminate\Http\Request;
+use Exception;
 
 class VotesController extends Controller
 {
+
+    protected $objSurvey;
+
+    public function __construct(){
+        $this->objSurvey = new ModelSurvey();
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -37,15 +45,19 @@ class VotesController extends Controller
         //
     }
 
+
     /**
-     * Display the specified resource.
+     * Show votes counted.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JSON
      */
     public function show($id)
     {
-        //
+
+        $answers = $this->objSurvey->find($id);
+
+        return view('countvotes', compact('answers'));
     }
 
     /**
@@ -68,7 +80,26 @@ class VotesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $vote = $request->answer;
+
+        $answers = $this->objSurvey->find($id);
+
+        $arrAnswers = (array) json_decode($answers->answers);
+
+        $arrAnswers[$vote] = (int) $arrAnswers[$vote] + 1;
+
+        try {
+            $this->objSurvey->where(['id' => $id])->update([
+                'answers' => json_encode($arrAnswers, JSON_UNESCAPED_UNICODE),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            return redirect("/survey/{$id}");
+        } catch (Exception $e) {
+            $error = $e;
+            return view('fail', compact('error'));
+        }
     }
 
     /**

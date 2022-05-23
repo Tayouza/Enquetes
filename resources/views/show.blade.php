@@ -12,7 +12,8 @@
         <p>Termina em: {{date('d/m/Y H:i', strtotime($survey->ended_at))}}</p>
     </div>
     <div class="flex flex-column justify-content-center align-items-center">
-        <form action="" class="d-flex flex-column align-items-center justify-content-center form-votes">
+        <form action="{{url("countvotes/{$survey->id}")}}" method="POST" class="d-flex flex-column align-items-center justify-content-center form-votes">
+            @method('PUT')
             @csrf
             <table class="table-survey">
                 <tbody>
@@ -22,7 +23,7 @@
                             <span>{{$answer}}</span>
                         </td>
                         <td>
-                            <input type="radio" name="answer">
+                            <input type="radio" name="answer" value="{{$answer}}" required>
                         </td>
                         <td>
                             <span>{{$votes}}</span>
