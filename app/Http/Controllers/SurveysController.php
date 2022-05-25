@@ -23,6 +23,17 @@ class SurveysController extends Controller
      */
     public function index()
     {
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $surveys = $this->objSurvey->all();
+
+        foreach ($surveys as $survey) {
+            $end = $survey->ended_at;
+            if (strtotime($end) <= time()) {
+                $this->objSurvey->destroy($survey->id);
+            }
+        }
+
         $surveys = $this->objSurvey->all();
 
         return view('index', compact('surveys'));
@@ -77,9 +88,13 @@ class SurveysController extends Controller
     {
         $survey = $this->objSurvey->find($id);
         //make string coming from db in array
-        $answers = json_decode($survey->answers);
+        try {
+            $answers = (array) json_decode($survey->answers);
 
-        return view('show', compact('survey', 'answers'));
+            return view('show', compact('survey', 'answers'));
+        } catch (Exception $e) {
+            return view('fail');
+        }
     }
 
     /**

@@ -28,7 +28,7 @@
                     <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
                         class="btn btn-danger btn-delete">Deletar</a>
                     <br>
-                    <div class="mt-2" >
+                    <div class="mt-2">
                         <a href="<?php echo e(url("countvotes/{$survey->id}")); ?>" class="viewVotes">Visualizar votos</a>
                     </div>
                 </div>

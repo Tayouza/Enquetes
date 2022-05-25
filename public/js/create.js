@@ -8,6 +8,8 @@ var inputBtn = $('<input>').attr('type', 'button')
     .attr('onclick', 'removeInput(this)')
     .addClass('remove-btn')
 
+const url = window.location.host
+
 const newInput = (items = []) => {
     if (items.length < 3) {
         items.length = 3
@@ -20,7 +22,7 @@ const newInput = (items = []) => {
 }
 
 const getAnswers = async (id) => {
-    const data = await fetch(`http://localhost:8000/answer/${id}`)
+    const data = await fetch(`http://${url}/answer/${id}`)
         .then(res => res.json())
         .then(data => {
             const answers = JSON.parse(data.answers)

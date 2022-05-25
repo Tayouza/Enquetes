@@ -13,7 +13,7 @@ $percentVotes = $value / $totalVotes * 100;
 <label for=""><?php echo e($key); ?></label>
 
 <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: <?php echo e($percentVotes); ?>%" aria-valuenow="75" aria-valuemin="0"
+    <div class="progress-bar" role="progressbar" style="width: <?php echo e($percentVotes); ?>%" aria-valuenow="<?php echo e($percentVotes); ?>" aria-valuemin="0"
         aria-valuemax="100"></div>
 </div>
 <p>Votos: <?php echo e($value); ?></p>

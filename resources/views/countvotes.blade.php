@@ -13,7 +13,7 @@ $percentVotes = $value / $totalVotes * 100;
 <label for="">{{$key}}</label>
 
 <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: {{$percentVotes}}%" aria-valuenow="75" aria-valuemin="0"
+    <div class="progress-bar" role="progressbar" style="width: {{$percentVotes}}%" aria-valuenow="{{$percentVotes}}" aria-valuemin="0"
         aria-valuemax="100"></div>
 </div>
 <p>Votos: {{$value}}</p>

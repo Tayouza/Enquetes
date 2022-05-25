@@ -26,7 +26,7 @@
                     <a href="{{url("survey/{$survey->id}")}}"
                         class="btn btn-danger btn-delete">Deletar</a>
                     <br>
-                    <div class="mt-2" >
+                    <div class="mt-2">
                         <a href="{{url("countvotes/{$survey->id}")}}" class="viewVotes">Visualizar votos</a>
                     </div>
                 </div>
