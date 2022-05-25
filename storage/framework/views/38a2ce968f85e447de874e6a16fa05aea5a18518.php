@@ -25,9 +25,6 @@
                         <td>
                             <input type="radio" name="answer" value="<?php echo e($answer); ?>" required>
                         </td>
-                        <td>
-                            <span><?php echo e($votes); ?></span>
-                        </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

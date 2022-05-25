@@ -25,9 +25,6 @@
                         <td>
                             <input type="radio" name="answer" value="{{$answer}}" required>
                         </td>
-                        <td>
-                            <span>{{$votes}}</span>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

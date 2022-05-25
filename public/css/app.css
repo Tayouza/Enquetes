@@ -141,6 +141,14 @@ header {
     transform: scale(1.2);
 }
 
+.viewVotes{
+    text-decoration: none;
+}
+
+.viewVotes:hover{
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
 
     .window{

@@ -55,9 +55,16 @@ class VotesController extends Controller
     public function show($id)
     {
 
-        $answers = $this->objSurvey->find($id);
+        $answer = $this->objSurvey->find($id);
 
-        return view('countvotes', compact('answers'));
+        $votes = (array) json_decode($answer->answers);
+
+        $totalVotes = 0;
+        foreach($votes as $key => $value){
+            $totalVotes += $votes[$key]; 
+        }
+
+        return view('countvotes', compact('answer', 'votes', 'totalVotes'));
     }
 
     /**
@@ -95,7 +102,7 @@ class VotesController extends Controller
                 'answers' => json_encode($arrAnswers, JSON_UNESCAPED_UNICODE),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
-            return redirect("/survey/{$id}");
+            return redirect("/countvotes/{$id}");
         } catch (Exception $e) {
             $error = $e;
             return view('fail', compact('error'));

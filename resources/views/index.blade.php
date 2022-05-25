@@ -18,12 +18,18 @@
                     Criado em: {{date('d/m/Y H:i', strtotime($survey->created_at))}}
                     Termina em: {{date('d/m/Y H:i', strtotime($survey->ended_at))}}
                 </p>
-                <a href="{{url("survey/{$survey->id}")}}"
-                    class="btn btn-primary">Votar</a>
-                <a href="{{url("survey/{$survey->id}/edit")}}"
-                    class="btn btn-warning">Editar</a>
-                <a href="{{url("survey/{$survey->id}")}}"
-                    class="btn btn-danger btn-delete">Deletar</a>
+                <div class="actions">
+                    <a href="{{url("survey/{$survey->id}/edit")}}"
+                        class="btn btn-warning">Editar</a>
+                    <a href="{{url("survey/{$survey->id}")}}"
+                        class="btn btn-primary">Votar</a>
+                    <a href="{{url("survey/{$survey->id}")}}"
+                        class="btn btn-danger btn-delete">Deletar</a>
+                    <br>
+                    <div class="mt-2" >
+                        <a href="{{url("countvotes/{$survey->id}")}}" class="viewVotes">Visualizar votos</a>
+                    </div>
+                </div>
             </div>
         </div>
         @endforeach

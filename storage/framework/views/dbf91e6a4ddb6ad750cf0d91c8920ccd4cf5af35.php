@@ -20,12 +20,18 @@
                     Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->ended_at))); ?>
 
                 </p>
-                <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
-                    class="btn btn-primary">Votar</a>
-                <a href="<?php echo e(url("survey/{$survey->id}/edit")); ?>"
-                    class="btn btn-warning">Editar</a>
-                <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
-                    class="btn btn-danger btn-delete">Deletar</a>
+                <div class="actions">
+                    <a href="<?php echo e(url("survey/{$survey->id}/edit")); ?>"
+                        class="btn btn-warning">Editar</a>
+                    <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
+                        class="btn btn-primary">Votar</a>
+                    <a href="<?php echo e(url("survey/{$survey->id}")); ?>"
+                        class="btn btn-danger btn-delete">Deletar</a>
+                    <br>
+                    <div class="mt-2" >
+                        <a href="<?php echo e(url("countvotes/{$survey->id}")); ?>" class="viewVotes">Visualizar votos</a>
+                    </div>
+                </div>
             </div>
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
