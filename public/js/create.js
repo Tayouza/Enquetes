@@ -2,13 +2,12 @@ var inputText = $('<input>').attr('type', 'text')
     .attr('name', 'answer[]')
     .attr('required', '')
     .addClass('form-control my-1 inputAnswerText')
-    
+
 var inputBtn = $('<input>').attr('type', 'button')
     .attr('value', 'X')
     .attr('onclick', 'removeInput(this)')
     .addClass('remove-btn')
 
-const url = window.location.host
 
 const newInput = (items = []) => {
     if (items.length < 3) {
@@ -22,6 +21,7 @@ const newInput = (items = []) => {
 }
 
 const getAnswers = async (id) => {
+    const url = window.location.host
     const data = await fetch(`http://${url}/answer/${id}`)
         .then(res => res.json())
         .then(data => {
