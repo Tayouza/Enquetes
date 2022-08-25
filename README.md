@@ -1,3 +1,3 @@
-# <center>Tayouza Survey 📑</center>
+# Enquetes
 
 ## > Sistema de cadastros de Enquetes
