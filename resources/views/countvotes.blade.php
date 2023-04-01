@@ -7,7 +7,11 @@
 
 @foreach($votes as $key => $value)
 @php
-$percentVotes = $value / $totalVotes * 100;
+if($totalVotes !== 0){
+    $percentVotes = $value / $totalVotes * 100;
+}else{
+    $percentVotes = 0;
+}
 @endphp
 
 <label for="">{{$key}}</label>
