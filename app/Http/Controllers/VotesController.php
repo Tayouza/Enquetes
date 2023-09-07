@@ -2,119 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ModelSurvey;
+use App\Models\Survey;
+use App\Models\User;
+use App\Models\Vote;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Exception;
 
 class VotesController extends Controller
 {
-
-    protected $objSurvey;
-
-    public function __construct(){
-        $this->objSurvey = new ModelSurvey();
-    } 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function __construct(
+        readonly private Vote $vote,
+        readonly private Survey $survey,
+    ) {
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    /**
-     * Show votes counted.
-     *
-     * @param  int  $id
-     * @return JSON
-     */
     public function show($id)
     {
+        $survey = $this->survey->find($id);
 
-        $answer = $this->objSurvey->find($id);
+        $answers = $survey->options;
 
-        $votes = (array) json_decode($answer->answers);
+        $maxVotes = $answers->map(
+            fn($answer) => $answer->votes
+                ->count()
+        )
+            ->max();
 
-        $totalVotes = 0;
-        foreach($votes as $key => $value){
-            $totalVotes += $votes[$key]; 
-        }
+        $totalVotes = $answers->map(
+            fn($answer) => $answer->votes
+                ->count()
+        )
+            ->sum();
 
-        return view('countvotes', compact('answer', 'votes', 'totalVotes'));
+        return view('countvotes', compact('survey', 'answers', 'totalVotes', 'maxVotes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function vote(Request $request): RedirectResponse
     {
-        //
+        $vote = $request->input('vote');
+
+        $vote = $this->vote->create([
+            'survey_option_id' => $vote,
+            'user_id' => 2
+        ]);
+
+        $id = $vote->surveyOption->survey->id;
+
+        return redirect("countvotes/$id");
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        date_default_timezone_set('America/Sao_Paulo');
-
         $vote = $request->answer;
 
-        $answers = $this->objSurvey->find($id);
+        $answers = $this->survey->find($id);
 
         $arrAnswers = (array) json_decode($answers->answers);
 
         $arrAnswers[$vote] = (int) $arrAnswers[$vote] + 1;
 
         try {
-            $this->objSurvey->where(['id' => $id])->update([
+            $this->survey->where(['id' => $id])->update([
                 'answers' => json_encode($arrAnswers, JSON_UNESCAPED_UNICODE),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
-            return redirect("/countvotes/{$id}");
+            return redirect("/countvotes/$id");
         } catch (Exception $e) {
             $error = $e;
             return view('fail', compact('error'));
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

@@ -21,20 +21,20 @@ class SurveyRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title'=>'required',
-            'answer'=>'required',
-            'ended_at'=>'required'
+            'title' => 'required',
+            'answer' => 'required',
+            'finish_at' => 'required'
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'title.required'=>'Sua enquete precisa de um Título',
-            'ended_at.required'=>'Adicione uma data para encerar a enquete'
+            'title.required' => 'Sua enquete precisa de um Título',
+            'ended_at.required' => 'Adicione uma data para encerar a enquete'
         ];
     }
 }

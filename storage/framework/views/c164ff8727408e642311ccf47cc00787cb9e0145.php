@@ -28,6 +28,8 @@
             <?php echo $__env->yieldContent('content'); ?>
         </section>
     </div>
+    <script src="/js/create.js"></script>
 </body>
 
-</html><?php /**PATH /home/tayouzadev/Documents/Projects/Enquetes/resources/views/templates/template.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH /home/tayouzadev/Documents/Projects/Enquetes/resources/views/templates/template.blade.php ENDPATH**/ ?>

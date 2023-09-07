@@ -12,6 +12,7 @@
 }
 
 .window {
+    width: 575px;
     max-width: 1080px;
     box-shadow: 25px 35px 10px 10px #555;
     resize: both;

@@ -28,6 +28,7 @@
             @yield('content')
         </section>
     </div>
+    <script src="/js/create.js"></script>
 </body>
 
 </html>

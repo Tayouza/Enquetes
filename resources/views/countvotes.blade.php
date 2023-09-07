@@ -3,30 +3,30 @@
 @section('title', 'Tayouza Survey')
 
 @section('content')
-<h2>{{$answer->title}}</h2>
+<h2>{{$survey->title}}</h2>
 
-@foreach($votes as $key => $value)
+@foreach($answers as $answer)
 @php
 if($totalVotes !== 0){
-    $percentVotes = $value / $totalVotes * 100;
+    $percentVotes = $answer->votes->count() / $maxVotes * 100;
 }else{
     $percentVotes = 0;
 }
 @endphp
 
-<label for="">{{$key}}</label>
+<label for="">{{$answer->name}}</label>
 
 <div class="progress">
     <div class="progress-bar" role="progressbar" style="width: {{$percentVotes}}%" aria-valuenow="{{$percentVotes}}" aria-valuemin="0"
         aria-valuemax="100"></div>
 </div>
-<p>Votos: {{$value}}</p>
+<p>Votos: {{$answer->votes->count()}}</p>
 @endforeach
 
 <h4 class="text-center">Total de votos da enquete: {{$totalVotes}}</h4>
 
 <div class="text-center mt-4">
-    <a href="{{url("/survey/{$answer->id}")}}" class="btn btn-warning">Votar novamente</a>
+    <a href="{{url("survey/{$survey->id}")}}" class="btn btn-warning">Votar novamente</a>
 </div>
 
 @endsection

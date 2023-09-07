@@ -15,7 +15,7 @@
                 <p class="card-text">
                     Criado em: <?php echo e(date('d/m/Y H:i', strtotime($survey->created_at))); ?>
 
-                    Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->ended_at))); ?>
+                    Termina em: <?php echo e(date('d/m/Y H:i', strtotime($survey->finish_at))); ?>
 
                 </p>
                 <div class="actions">
@@ -37,4 +37,5 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('templates.template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/tayouzadev/Documents/Projects/Enquetes/resources/views/index.blade.php ENDPATH**/ ?>

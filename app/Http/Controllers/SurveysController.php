@@ -2,185 +2,123 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ModelSurvey;
+use App\Models\Survey;
+use App\Models\SurveyOption;
 use Exception;
-use ArrayIterator;
 use App\Http\Requests\SurveyRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class SurveysController extends Controller
 {
-    private $objSurvey;
-
-    public function __construct()
-    {
-        $this->objSurvey = new ModelSurvey();
+    public function __construct(
+        readonly private Survey $survey,
+        readonly private SurveyOption $surveyOption,
+    ) {
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
-        date_default_timezone_set('America/Sao_Paulo');
-
-        $surveys = $this->objSurvey->all();
+        $surveys = $this->survey->all();
 
         foreach ($surveys as $survey) {
-            $end = $survey->ended_at;
+            $end = $survey->finish_at;
             if (strtotime($end) <= time()) {
-                $this->objSurvey->destroy($survey->id);
+                $this->survey->destroy($survey->id);
             }
         }
 
-        $surveys = $this->objSurvey->all();
+        $surveys = $this->survey->all();
 
         return view('index', compact('surveys'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(): View
     {
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(SurveyRequest $request)
+    public function store(SurveyRequest $request): RedirectResponse|View
     {
+        DB::beginTransaction();
+
         try {
-            date_default_timezone_set('America/Sao_Paulo');
+            $answers = $request->input('answer');
 
-            $answers = $request->answer;
-
-            $toJSON = json_encode(self::surveyAnswersToJSON($answers), JSON_UNESCAPED_UNICODE);
-
-            $this->objSurvey->create([
-                'title' => $request->title,
-                'answers' => $toJSON,
-                'created_at' => date('Y-m-d H:i:s'),
-                'uploaded_at' => date('Y-m-d H:i:s'),
-                'ended_at' => str_replace('T', ' ', $request->ended_at)
+            $survey = $this->survey->create([
+                'title' => $request->input('title'),
+                'creator_id' => 1,
+                'finish_at' => str_replace('T', ' ', $request->input('finish_at'))
             ]);
+
+            foreach ($answers as $answer) {
+                $this->surveyOption->create([
+                    'name' => $answer,
+                    'survey_id' => $survey->id
+                ]);
+            }
+            DB::commit();
+
             return redirect('survey');
         } catch (Exception $e) {
             $errors = $e;
+            DB::rollBack();
+
             return view('fail', compact('errors'));
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($id): View
     {
-        $survey = $this->objSurvey->find($id);
-        //make string coming from db in array
-        try {
-            $answers = (array) json_decode($survey->answers);
+        $survey = $this->survey->find($id);
+        $answers = $survey->options;
 
-            return view('show', compact('survey', 'answers'));
-        } catch (Exception $e) {
-            return view('fail');
-        }
+        return view('show', compact('survey', 'answers'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($id): View
     {
-        $survey = $this->objSurvey->find($id);
+        $survey = $this->survey->find($id);
         return view('create', compact('survey'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(SurveyRequest $request, $id)
+    public function update(SurveyRequest $request, int $id): RedirectResponse|View
     {
-        date_default_timezone_set('America/Sao_Paulo');
-
-        $answers = $request->answer;
-
-        $toJSON = self::surveyAnswersToJSON($answers);
+        DB::beginTransaction();
 
         try {
-            $this->objSurvey->where(['id' => $id])->update([
-                'title' => $request->title,
-                'answers' => json_encode($toJSON, JSON_UNESCAPED_UNICODE),
-                'updated_at' => date('Y-m-d H:i:s'),
-                'ended_at' => str_replace('T', ' ', $request->ended_at)
-            ]);
+            $answers = $request->input('answer');
+
+            $survey = $this->survey->find($id);
+            $survey->finish_at = str_replace('T', ' ', $request->input('finish_at'));
+            $survey->save();
+
+            foreach ($answers as $answer) {
+                $answer = $this->surveyOption
+                    ->where('name', $answer)
+                    ->first();
+
+                if (! $answer) {
+                    $this->surveyOption->create([
+                        'name' => $answer,
+                        'survey_id' => $survey->id
+                    ]);
+                }
+            }
+            DB::commit();
+
             return redirect('survey');
         } catch (Exception $e) {
-            $error = $e;
-            return view('fail', compact('error'));
+            $errors = $e;
+            DB::rollBack();
+
+            return view('fail', compact('errors'));
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id): bool
     {
-        $deleted = $this->objSurvey->destroy($id);
-        return $deleted ? true : false;
-    }
-
-    /**
-     * Provides answers data.
-     *
-     * @param  int  $id
-     * @return JSON
-     */
-    public function getAnswers($id)
-    {
-        $answers = $this->objSurvey->find($id);
-        return json_encode($answers, JSON_UNESCAPED_UNICODE);
-    }
-
-    /**
-     * Format array answers.
-     *
-     * @param  Array
-     * @return Array
-     */
-    public static function surveyAnswersToJSON($arr)
-    {
-        $iterator = new ArrayIterator($arr);
-
-        $newArrKeyValue = [];
-
-        while ($iterator->valid()) {
-
-            $newArrKeyValue[$iterator->current()] = "0";
-
-            $iterator->next();
-        }
-
-        return $newArrKeyValue;
+        return (bool) $this->survey->destroy($id);
     }
 }

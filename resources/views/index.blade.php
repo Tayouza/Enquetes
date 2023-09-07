@@ -16,7 +16,7 @@
                 <h5 class="card-title">{{$survey->title}}</h5>
                 <p class="card-text">
                     Criado em: {{date('d/m/Y H:i', strtotime($survey->created_at))}}
-                    Termina em: {{date('d/m/Y H:i', strtotime($survey->ended_at))}}
+                    Termina em: {{date('d/m/Y H:i', strtotime($survey->finish_at))}}
                 </p>
                 <div class="actions">
                     <a href="{{url("survey/{$survey->id}/edit")}}"
